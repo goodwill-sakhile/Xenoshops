@@ -3,6 +3,12 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.screen import MDScreen
 from kivy.lang import Builder
 root = Builder.load_string("""
+<ShopBox>:
+	FitImage:
+		size_hint:None, None
+		size:"80dp", "90dp"
+		radius:40, 40, 40, 40
+		source:"pic.jpg"
 <HomeScreen>:
 	name:"home_screen"
 	MDBoxLayout:
@@ -23,6 +29,13 @@ root = Builder.load_string("""
 					text_color:1, 1, 1, 1
 					pos_hint:{"center_x":.5, "center_y":.5}
 			MDBoxLayout:
+				MDLabel:
+					text:"Xenoshops"
+					text_size:self.size
+					halign:"center"
+					valign:"middle"
+					font_size:"25dp"
+					color:1, 1, 1, 1
 			MDBoxLayout:
 				size_hint_x:None
 				width:"50dp"
@@ -41,8 +54,22 @@ root = Builder.load_string("""
 			MDBoxLayout:
 				size_hint_x:None
 				width:"300dp"
+				orientation:"vertical"
+				MDBoxLayout:
+					size_hint_y:None
+					height:"100dp"
+					spacing:5
+					ShopBox:
+					ShopBox:
+					ShopBox:
+				MDBoxLayout:
+					size_hint_y:None 
+					height:"40dp"
+				MDBoxLayout:
 			Widget:
 """)
+class ShopBox(MDBoxLayout):
+	pass
 class HomeScreen(MDScreen):
 	pass
 class TestApp(MDApp):
