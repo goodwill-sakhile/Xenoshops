@@ -67,6 +67,7 @@ root = Builder.load_string("""
 					height:"40dp"
 				MDBoxLayout:
 			Widget:
+				
 """)
 class ShopBox(MDBoxLayout):
 	pass
