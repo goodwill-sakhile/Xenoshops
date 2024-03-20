@@ -4,18 +4,55 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.gridlayout import MDGridLayout
 from kivy.lang import Builder
 root = Builder.load_string("""
+<ItemSpaceBox>:
+	radius:20, 20, 20, 20
+	orientation:"vertical"
+	size_hint_y:None
+	height:"500dp"
+	md_bg_color:57/float(255), 87/float(255), 87/float(255), 1
+	MDBoxLayout:
+	MDBoxLayout:
+		size_hint_y:None
+		height:"70dp"
+		padding:10
+		spacing:10
+		MDIconButton:
+			md_bg_color:0/float(255), 0/float(255), 0/float(255), 1
+			icon:"cart-arrow-down"
+			size_hint:None, None
+			size:"30dp", "30dp"
+			pos_hint:{"center_x":.5, "center_y":.5}
+			icon_size:"30dp"
+			theme_text_color:"Custom"
+			text_color:0, 250/float(255), 154/float(255), 1
+		MDIconButton:
+			md_bg_color:0/float(255), 0/float(255), 0/float(255), 1
+			icon:"cart-arrow-up"
+			size_hint:None, None
+			size:"30dp", "30dp"
+			pos_hint:{"center_x":.5, "center_y":.5}
+			icon_size:"30dp"
+			theme_text_color:"Custom"
+			text_color:220/float(255), 20/float(255), 60/float(255), 1
+		
 <RoundShopIcon>:
 	size_hint:None, None
-	size:"70dp", "70dp" 
+	size:"50dp", "50dp" 
+	image:""
 	md_bg_color:1, 1, 1, 1
-	radius:70, 70, 70, 70
+	radius:50, 50, 50, 50
 	Widget:
 	MDBoxLayout:
 		md_bg_color:0, 0, 0, 1
 		size_hint:None, None
-		size:"65dp", "65dp"
-		radius:65, 65, 65, 65
+		size:"45dp", "45dp"
+		radius:45, 45, 45, 45
 		pos_hint:{"center_x":.5, "center_y":.5}
+		FitImage:
+			size_hint:None, None
+			size:"45dp", "45dp"
+			radius:45, 45, 45, 45
+			source:root.image
 	Widget:
 <HomeScreen>:
 	name:"home_screen"
@@ -66,61 +103,85 @@ root = Builder.load_string("""
 				Widget: 
 				MDBoxLayout:
 					size_hint_x:None
-					width:"300dp" 
+					width:"400dp" 
 					orientation:"vertical"
 					MDBoxLayout:
 						size_hint_y:None
-						height:"100dp"
+						height:"60dp"
+						padding:10
+						RoundShopIcon:
+						Widget:
+						MDBoxLayout:
+							size_hint_x:None
+							width:"60dp"
+							MDIconButton: 
+								icon:"filter-cog-outline"
+								size_hint:None, None
+								size:"40dp", "40dp"
+								icon_size:"30dp"
+					MDBoxLayout: 
+						orientation:"vertical"
 						ScrollView:
 							size_hint:None, None
 							size:self.parent.size
 							bar_width:0
-							ShopsLayout:
-					MDBoxLayout: 
-						orientation:"vertical"
-						Widget:
+							ItemsListLayout:
+					MDBoxLayout:
+						size_hint_y:None
+						height:"80dp"
+						padding:10
 						MDBoxLayout:
 							size_hint_y:None
-							height:"400dp"
-							md_bg_color:0, 1, 1, 1
-							orientation:"vertical"
-							spacing:5
-							MDBoxLayout:
-								spacing:5
-								MDBoxLayout:
-									md_bg_color:0, 0, 0, 1
-								MDBoxLayout:
-									md_bg_color:0, 0, 0, 1
-							MDBoxLayout:
-								spacing:5
-								MDBoxLayout:
-									md_bg_color:0, 0, 0, 1
-								MDBoxLayout:
-									md_bg_color:0, 0, 0, 1
-							MDBoxLayout:
-								spacing:5
-								MDBoxLayout:
-									md_bg_color:0, 0, 0, 1
-								MDBoxLayout:
-									md_bg_color:0, 0, 0, 1
-						Widget:
+							height:"60dp"
+							radius:60, 60, 60, 60
+							md_bg_color:0, 0, 0, 1
+							padding:5
+							Widget:
+							RoundShopIcon:
+								image:"picknpay.png"
+								pos_hint:{"center_x":.5, "center_y":.5}
+							Widget:
+							RoundShopIcon:
+								image:"shoprite.png"
+								pos_hint:{"center_x":.5, "center_y":.5}
+							Widget:
+							RoundShopIcon:
+								image:"checkers.png"
+								pos_hint:{"center_x":.5, "center_y":.5}
+							Widget:
+							RoundShopIcon:
+								image:"woolworths.jpeg"
+								pos_hint:{"center_x":.5, "center_y":.5}
+							Widget:
+							RoundShopIcon:
+								pos_hint:{"center_x":.5, "center_y":.5}
+							Widget:
+							MDIconButton:
+								size_hint:None, None
+								size:"50dp", "50dp"
+								icon:"skew-more"
+								theme_text_color:"Custom"
+								text_color:1, 1, 1, 1
+								icon_size:"30dp"
+								pos_hint:{"center_x":.5, "center_y":.5}
 				Widget:
 """)
-class RoundShopIcon(MDBoxLayout):
+class ItemSpaceBox(MDBoxLayout):
 	pass
-class ShopsLayout(MDGridLayout):
+class ItemsListLayout(MDGridLayout):
 	def __init__(self, **kwargs):
 		super().__init__(**kwargs)
-		self.size_hint_x = None
-		self.rows = 1
-		self.spacing = "10dp"
-		self.padding = "10dp", "15dp"
-		self.bind(minimum_width = self.setter("width"))
-		self.ListShops()
-	def ListShops(self):
+		self.cols = 1
+		self.size_hint_y = None
+		self.spacing = 10
+		self.bind(minimum_height = self.setter("height"))
+		self.stackItems()
+	def stackItems(self):
 		for i in range(5):
-			shop = RoundShopIcon()
-			self.add_widget(shop)
+			item = ItemSpaceBox()
+			self.add_widget(item)
+class RoundShopIcon(MDBoxLayout):
+	pass
 class HomeScreen(MDScreen):
 	pass
 class TestApp(MDApp):
