@@ -2,6 +2,11 @@ from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.gridlayout import MDGridLayout
+from kivy.uix.screenmanager import SlideTransition
+from load_screen import LoadScreen
+import time
+import _thread as thread
+from touch import TouchBox
 from kivy.lang import Builder
 root = Builder.load_string("""
 <ItemSpaceBox>:
@@ -11,6 +16,11 @@ root = Builder.load_string("""
 	height:"500dp"
 	md_bg_color:57/float(255), 87/float(255), 87/float(255), 1
 	MDBoxLayout:
+		FitImage:
+			id:item_image
+			size_hint:None, None
+			size:self.parent.size
+			source:""
 	MDBoxLayout:
 		size_hint_y:None
 		height:"70dp"
@@ -56,6 +66,7 @@ root = Builder.load_string("""
 	Widget:
 <HomeScreen>:
 	name:"home_screen"
+	id:home_screen
 	MDBoxLayout:
 		md_bg_color:47/float(255), 79/float(255), 79/float(255), 1
 		MDBoxLayout:
@@ -121,11 +132,19 @@ root = Builder.load_string("""
 								icon_size:"30dp"
 					MDBoxLayout: 
 						orientation:"vertical"
-						ScrollView:
-							size_hint:None, None
-							size:self.parent.size
-							bar_width:0
-							ItemsListLayout:
+						ScreenManager:
+							id:body_screen_manager
+							MDScreen:
+								name:"items_list_screen"
+								MDBoxLayout:
+									ScrollView:
+										size_hint:None, None
+										size:self.parent.size
+										bar_width:0
+										ItemsListLayout:
+							LoadScreen:
+							MDScreen:
+								name:"empty_screen"
 					MDBoxLayout:
 						size_hint_y:None
 						height:"80dp"
@@ -138,22 +157,27 @@ root = Builder.load_string("""
 							padding:5
 							Widget:
 							RoundShopIcon:
+								root:home_screen
 								image:"picknpay.png"
 								pos_hint:{"center_x":.5, "center_y":.5}
 							Widget:
 							RoundShopIcon:
+								root:home_screen
 								image:"shoprite.png"
 								pos_hint:{"center_x":.5, "center_y":.5}
 							Widget:
 							RoundShopIcon:
+								root:home_screen
 								image:"checkers.png"
 								pos_hint:{"center_x":.5, "center_y":.5}
 							Widget:
 							RoundShopIcon:
+								root:home_screen
 								image:"woolworths.jpeg"
 								pos_hint:{"center_x":.5, "center_y":.5}
 							Widget:
 							RoundShopIcon:
+								root:home_screen
 								pos_hint:{"center_x":.5, "center_y":.5}
 							Widget:
 							MDIconButton:
@@ -175,13 +199,28 @@ class ItemsListLayout(MDGridLayout):
 		self.size_hint_y = None
 		self.spacing = 10
 		self.bind(minimum_height = self.setter("height"))
+		self.items = ["item_1", "item_2", "item_3",  "item_4"]
 		self.stackItems()
 	def stackItems(self):
-		for i in range(5):
+		for image in self.items:
 			item = ItemSpaceBox()
+			item.ids.item_image.source = image
 			self.add_widget(item)
-class RoundShopIcon(MDBoxLayout):
-	pass
+class RoundShopIcon(TouchBox):
+	def __init__(self, **kwargs):
+		super().__init__(**kwargs)
+		self.next_shop_screen = ""
+	def respondToTouch(self):
+		if self.root.ids.body_screen_manager.current != "load_screen":
+			self.switchToLoadingScreen()
+	def switchToLoadingScreen(self):
+		self.root.ids.body_screen_manager.transition  = SlideTransition(direction = "left")
+		self.root.ids.body_screen_manager.current = "load_screen"
+		thread.start_new_thread(self.prepareToMoveToNextShop, ( ))
+	def prepareToMoveToNextShop(self):
+		time.sleep(2)
+		self.root.ids.body_screen_manager.transition  = SlideTransition(direction = "left")
+		self.root.ids.body_screen_manager.current = "empty_screen"
 class HomeScreen(MDScreen):
 	pass
 class TestApp(MDApp):
