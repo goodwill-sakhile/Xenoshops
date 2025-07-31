@@ -1,0 +1,19 @@
+<HomeScreen>:
+    name: "home"
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "10dp"
+        padding: "20dp"
+
+        MDLabel:
+            text: "Retail Shop Directory"
+            halign: "center"
+            font_style: "H4"
+
+        MDRaisedButton:
+            text: "View Grocery Shops"
+            on_release: app.sm.current = "shop_list"
+
+        MDRaisedButton:
+            text: "Search Shops"
+            on_release: app.sm.current = "search"
