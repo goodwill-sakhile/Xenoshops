@@ -1,5 +1,11 @@
 from kivymd.uix.screen import MDScreen
 import requests
+import webbrowser
+
+def open_in_maps(self):
+    address = self.shop_data['address'].replace(" ", "+")
+    url = f"https://www.google.com/maps/search/?api=1&query={address}"
+    webbrowser.open(url)
 
 def on_enter(self):
     shop = self.shop_data
