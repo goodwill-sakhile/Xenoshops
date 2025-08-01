@@ -17,3 +17,10 @@
         MDRaisedButton:
             text: "Search Shops"
             on_release: app.sm.current = "search"
+        MDFloatingActionButton:
+            icon: "logout"
+            pos_hint: {"right": 0.95, "top": 0.95}
+            on_release:
+                app.sm.parent.token = ""
+                app.sm.current = "login"
+
