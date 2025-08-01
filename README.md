@@ -31,4 +31,15 @@ The Retail Shop Directory is a full-stack application that helps users:
 ---
 
 ## 📂 Project Structure
+RetailDirectoryApp/
+├── backend/ # Django API backend
+│ ├── manage.py
+│ ├── retail_backend/ # Django project settings
+│ └── shops/ # API for shops, reviews, favorites
+│
+├── frontend/ # KivyMD mobile frontend
+│ ├── main.py
+│ ├── screens/ # Modular GUI screens
+│ ├── kv/ # Kivy markup (layouts)
+│ └── assets/ # Images and styling
 
