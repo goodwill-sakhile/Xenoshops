@@ -1,6 +1,8 @@
 from rest_framework import viewsets, filters
 from .models import Shop
 from .serializers import ShopSerializer
+from rest_framework.authtoken.views import obtain_auth_token
+
 
 class ShopViewSet(viewsets.ModelViewSet):
     queryset = Shop.objects.all().order_by('-created_at')
