@@ -1,0 +1,25 @@
+
+---
+
+## 🚀 Features
+
+- ✅ Browse all registered grocery and clothing shops
+- ✅ Register & Login using secure token authentication
+- ✅ View shop details (name, category, contact, image)
+- ✅ Add & view ratings and reviews
+- ✅ Save favorite shops to your profile
+- ✅ Search shops by name, category, or location
+- ✅ Open shop addresses directly in Google Maps
+
+---
+
+## 🧪 Getting Started
+
+### 🐍 Backend (Django)
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
