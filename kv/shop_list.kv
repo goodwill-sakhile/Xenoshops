@@ -1,0 +1,11 @@
+<ShopListScreen>:
+    name: "shop_list"
+    MDBoxLayout:
+        orientation: "vertical"
+        MDTopAppBar:
+            title: "Shops"
+            left_action_items: [["arrow-left", lambda x: app.sm.current = "home"]]
+
+        ScrollView:
+            MDList:
+                id: shop_list
