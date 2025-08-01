@@ -1,0 +1,27 @@
+<RegisterScreen>:
+    name: "register"
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "20dp"
+        spacing: "10dp"
+
+        MDTopAppBar:
+            title: "Register"
+
+        MDTextField:
+            id: username
+            hint_text: "Username"
+
+        MDTextField:
+            id: password
+            hint_text: "Password"
+            password: True
+
+        MDLabel:
+            id: message
+            text: ""
+            theme_text_color: "Hint"
+
+        MDRaisedButton:
+            text: "Register"
+            on_release: root.register_user()
