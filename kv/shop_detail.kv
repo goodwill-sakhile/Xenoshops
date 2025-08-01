@@ -1,0 +1,16 @@
+<ShopDetailScreen>:
+    name: "shop_detail"
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "20dp"
+        spacing: "10dp"
+
+        MDTopAppBar:
+            title: "Shop Details"
+            left_action_items: [["arrow-left", lambda x: app.sm.current = "shop_list"]]
+
+        MDLabel:
+            id: details_label
+            text: "Loading..."
+            halign: "left"
+            font_style: "Subtitle1"
