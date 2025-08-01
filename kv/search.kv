@@ -1,0 +1,19 @@
+<SearchScreen>:
+    name: "search"
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "10dp"
+        spacing: "10dp"
+
+        MDTopAppBar:
+            title: "Search"
+            left_action_items: [["arrow-left", lambda x: app.sm.current = "home"]]
+
+        MDTextField:
+            id: search_input
+            hint_text: "Search by name or category"
+            on_text: root.search_shops(self.text)
+
+        ScrollView:
+            MDList:
+                id: search_results
